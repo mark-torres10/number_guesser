@@ -4,28 +4,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="./script.js"></script>
+    <link rel="stylesheet" href="./style.css"></link>
 </head>
 <body>
     <!-- Add navbar -->
-    <div id="navbar-container"></div>
-    
+    <div id="navbar-container">
+        <div id="navbar">
+            <h1 class="navbar-title">Guess The Number</h1>
+        </div>
+    </div>
+        
     <!-- Add title, centered -->
     <div id="title-container">
-        <div></div>
+        <div>
+            <img class="title-pic" src="https://static.vecteezy.com/system/resources/previews/000/096/224/original/number-counter-vector-2.jpg" alt="Title picture"/>
+        </div>
     </div>
 
-    <!-- Add field to guess number -->
-    <div id="guess-container">
-        <div></div>
-    </div>
+    <!-- Encapsulate user interaction portions of code -->
+    <div id="user-interaction-container">
 
-    <!-- Add container for buttons to "check answer" or to "restart" -->
-    <div id="buttons-container">
+        <!-- Add field to guess number -->
+        <div id="guess-container">
+            <div>
+                <form class="number-guess">
+                    <input type="text" />
+                </form>
+            </div>
+        </div>
 
+        <!-- Add container for buttons to "check answer" or to "restart" -->
+        <div id="buttons-container">
+            <div>
+                <button type="button" id="number-submit">Check My Answer!</button>
+                <button type="button" id="restart-game">Restart</button>
+
+            </div>
+        </div>
     </div>
+    
 
     <!-- Add container to display past guesses -->
-    <div id="past-guesses-container">
+    <div id="guess-history-container">
 
     </div>
 

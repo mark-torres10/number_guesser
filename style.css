@@ -1,0 +1,28 @@
+#navbar {
+  background-color: rgb(88, 88, 131);
+  margin-top: 20px;
+  height: 100px;
+  margin-bottom: 20px;
+  border-radius: 25px;
+}
+
+.navbar-title {
+  color: white;
+  padding: 20px;
+}
+
+.title-pic {
+  max-width: 25%;
+  max-height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+}
+
+.number-guess {
+  size: 100px;
+}
+
+#user-interaction-container {
+}
