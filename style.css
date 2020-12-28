@@ -12,17 +12,56 @@
 }
 
 .title-pic {
-  max-width: 25%;
+  max-width: 40%;
   max-height: auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 25px;
   border-radius: 25px;
 }
 
 .number-guess {
-  size: 100px;
+  width: 500px;
+  height: 50px;
+  border-radius: 25px;
+  font-size: 40px;
 }
 
-#user-interaction-container {
+#guess-container {
+  display: flex;
+  justify-content: center;
+}
+
+#buttons-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button-submit {
+  background-color: rgb(53, 53, 53);
+  color: white;
+  font-size: 20px;
+  height: 75px;
+  width: 150px;
+  margin-right: 25px;
+  border-radius: 12.5px;
+}
+
+.button-submit:hover {
+  opacity: 0.5;
+}
+
+.button-restart {
+  background-color: gray;
+  color: black;
+  font-size: 30px;
+  height: 75px;
+  width: 150px;
+  margin-left: 25px;
+  border-radius: 12.5px;
+}
+
+.button-restart:hover {
+  opacity: 0.5;
 }
