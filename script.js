@@ -20,103 +20,104 @@ var svg = d3
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-//Read the data
-d3.csv(
-  "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_IC.csv",
-  function (data) {
-    // Add X axis --> it is a date format
-    var x = d3.scaleLinear().domain([0, 100]).range([0, width]);
-    svg
-      .append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+// Add X axis
+var x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+svg
+  .append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x));
 
-    // Add Y axis
-    var y = d3.scaleLinear().domain([0, 10]).range([height, 0]);
-    //svg.append("g").call(d3.axisLeft(y));
+// Add Y axis
+var y = d3.scaleLinear().domain([0, 10]).range([height, 0]);
+//svg.append("g").call(d3.axisLeft(y));
 
-    // add baseline
-    svg
-      .append("line") // attach a line
-      .style("stroke", "black") // colour the line
-      .attr("x1", 0) // x position of the first end of the line
-      .attr("y1", 200) // y position of the first end of the line
-      .attr("x2", width) // x position of the second end of the line
-      .attr("y2", 200); // y position of the second end of the line
+// add baseline
+svg
+  .append("line") // attach a line
+  .style("stroke", "black") // colour the line
+  .attr("x1", 0) // x position of the first end of the line
+  .attr("y1", 200) // y position of the first end of the line
+  .attr("x2", width) // x position of the second end of the line
+  .attr("y2", 200); // y position of the second end of the line
 
-    // add new line
-    let correction = width / 100;
-    let min = 10;
-    let max = 90;
+// add new lines
+let correction = width / 100;
+let min = 10;
+let max = 90;
 
-    svg
-      .append("line") // attach a line
-      .style("stroke", "blue") // colour the line
-      .attr("x1", correction * min) // x position of the first end of the line
-      .attr("y1", 150) // y position of the first end of the line
-      .attr("x2", correction * max) // x position of the second end of the line
-      .attr("y2", 150); // y position of the second end of the line
+// add left, right boundaries
+svg
+  .append("line") // attach a line
+  .style("stroke", "red") // colour the line
+  .attr("x1", correction * min) // x position of the first end of the line
+  .attr("y1", 100) // y position of the first end of the line
+  .attr("x2", correction * min) // x position of the second end of the line
+  .attr("y2", 400); // y position of the second end of the line
 
-    // add left, right boundaries
-    svg
-      .append("line") // attach a line
-      .style("stroke", "red") // colour the line
-      .attr("x1", correction * min) // x position of the first end of the line
-      .attr("y1", 100) // y position of the first end of the line
-      .attr("x2", correction * min) // x position of the second end of the line
-      .attr("y2", 300); // y position of the second end of the line
+svg
+  .append("line") // attach a line
+  .style("stroke", "red") // colour the line
+  .attr("x1", correction * max) // x position of the first end of the line
+  .attr("y1", 100) // y position of the first end of the line
+  .attr("x2", correction * max) // x position of the second end of the line
+  .attr("y2", 400); // y position of the second end of the line
 
-    svg
-      .append("line") // attach a line
-      .style("stroke", "red") // colour the line
-      .attr("x1", correction * max) // x position of the first end of the line
-      .attr("y1", 100) // y position of the first end of the line
-      .attr("x2", correction * max) // x position of the second end of the line
-      .attr("y2", 300); // y position of the second end of the line
+// add line for ideal next guess
+let midpointX = (correction * max + correction * min) / 2;
+svg
+  .append("line") // attach a line
+  .style("stroke", "green") // colour the line
+  .attr("x1", midpointX) // x position of the first end of the line
+  .attr("y1", 100) // y position of the first end of the line
+  .attr("x2", midpointX) // x position of the second end of the line
+  .attr("y2", 400); // y position of the second end of the line
 
-    /*
-    // Show confidence interval
-    svg
-      .append("path")
-      .datum(data)
-      .attr("fill", "#cce5df")
-      .attr("stroke", "none")
-      .attr(
-        "d",
-        d3
-          .area()
-          .x(function (d) {
-            return x(d.x);
-          })
-          .y0(function (d) {
-            return y(d.CI_right);
-          })
-          .y1(function (d) {
-            return y(d.CI_left);
-          }),
-      );
+// color in rectangular area corresponding to possible range for the numbers
+let rect = d3.area().x0(0).x1(400).y0(0).y1(400);
 
-    // Add the line
-    svg
-      .append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr(
-        "d",
-        d3
-          .line()
-          .x(function (d) {
-            return x(d.x);
-          })
-          .y(function (d) {
-            return y(d.y);
-          }),
-      );
-    */
-  },
-);
+svg.append("path").attr("d", rect).attr("fill", "green");
+
+/*
+// Show confidence interval
+svg
+  .append("path")
+  .datum(data)
+  .attr("fill", "#cce5df")
+  .attr("stroke", "none")
+  .attr(
+    "d",
+    d3
+      .area()
+      .x(function (d) {
+        return x(d.x);
+      })
+      .y0(function (d) {
+        return y(d.CI_right);
+      })
+      .y1(function (d) {
+        return y(d.CI_left);
+      }),
+  );
+
+// Add the line
+svg
+  .append("path")
+  .datum(data)
+  .attr("fill", "none")
+  .attr("stroke", "steelblue")
+  .attr("stroke-width", 1.5)
+  .attr(
+    "d",
+    d3
+      .line()
+      .x(function (d) {
+        return x(d.x);
+      })
+      .y(function (d) {
+        return y(d.y);
+      }),
+  );
+*/
 
 /*
 Generate a random number 1-100, for a person to guess
@@ -207,8 +208,6 @@ let isEqual = () => {
     let restartButton = document.getElementById("button-restart");
     restartButton.parentNode.insertBefore(newButton, restartButton.nextSibling);
   }
-
-  alert(`Are the two guesses equal? ${isCorrect}`);
 
   // insert after guess text box
   let guessDiv = document.getElementById("guess-container");
