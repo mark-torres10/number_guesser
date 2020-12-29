@@ -3,7 +3,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./script.js"></script>
     <link rel="stylesheet" href="./style.css"></link>
 </head>
 <body>
@@ -27,14 +26,14 @@
         <!-- Add field to guess number -->
         <div id="guess-container">
             <div>
-                <input class="number-guess" type="number" name="number-guess"/>
+                <input class="number-guess" type="number" name="number-guess" id="number-guess"/>
             </div>
         </div>
 
         <!-- Add container for buttons to "check answer" or to "restart" -->
         <div id="buttons-container">
-            <button class="button-submit" type="button" id="number-submit">Check My Answer!</button>
-            <button class="button-restart" type="button" id="restart-game">Restart</button>
+            <button id="button-submit" type="button">Check My Answer!</button>
+            <button id="button-restart" type="button">Restart</button>
         </div>
     </div>
     
@@ -44,5 +43,7 @@
 
     </div>
 
+    <!-- JS script -->
+    <script type="text/javascript" src="./script.js"></script>
 </body>
 </html>

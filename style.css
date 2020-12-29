@@ -36,9 +36,10 @@
 #buttons-container {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
-.button-submit {
+#button-submit {
   background-color: rgb(53, 53, 53);
   color: white;
   font-size: 20px;
@@ -48,13 +49,13 @@
   border-radius: 12.5px;
 }
 
-.button-submit:hover {
+#button-submit:hover {
   opacity: 0.5;
 }
 
-.button-restart {
+#button-restart {
   background-color: gray;
-  color: black;
+  color: white;
   font-size: 30px;
   height: 75px;
   width: 150px;
@@ -62,6 +63,22 @@
   border-radius: 12.5px;
 }
 
-.button-restart:hover {
+#button-restart:hover {
+  opacity: 0.5;
+}
+
+.new-popup {
+  color: pink;
+  background-color: blue;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
   opacity: 0.5;
 }
