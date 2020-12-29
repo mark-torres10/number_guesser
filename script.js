@@ -6,73 +6,84 @@ TODO: Maybe add a visualization of how many guesses it took you to get to the ri
 
 */
 
-// set the dimensions and margins of the graph
-let margin = { top: 10, right: 30, bottom: 30, left: 60 },
-  width = 400 - margin.left - margin.right,
-  height = 400 - margin.top - margin.bottom;
+let svg;
 
-// append the svg object to the body of the page
-let svg = d3
-  .select("#left-box")
-  .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+let drawChart = (min, max) => {
+  // clear, if it already exists:
+  if (svg) {
+    d3.selectAll("svg").remove();
+    svg.remove();
+    console.log("Previous SVG removed");
+  } else {
+    console.log("SVG doesn't exist");
+  }
+  // set the dimensions and margins of the graph
+  let margin = { top: 10, right: 30, bottom: 30, left: 60 },
+    width = 400 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-// Add X axis
-let x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+  // append the svg object to the body of the page
+  svg = d3
+    .select("#left-box")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-svg
-  .append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x));
+  // Add X axis
+  let x = d3.scaleLinear().domain([0, 100]).range([0, width]);
 
-// add new lines
-let correction = width / 100;
-let min = 10;
-let max = 90;
-let correctedMin = min * correction;
-let correctedMax = max * correction;
-let totalCorrectedLength = correctedMax - correctedMin;
+  svg
+    .append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+  // add new lines
+  let correction = width / 100;
+  let correctedMin = min * correction;
+  let correctedMax = max * correction;
+  let totalCorrectedLength = correctedMax - correctedMin;
 
-// add left, right boundaries
-svg
-  .append("line") // attach a line
-  .style("stroke", "red") // colour the line
-  .attr("x1", correctedMin) // x position of the first end of the line
-  .attr("y1", 100) // y position of the first end of the line
-  .attr("x2", correctedMin) // x position of the second end of the line
-  .attr("y2", 400); // y position of the second end of the line
+  // add left, right boundaries
+  svg
+    .append("line") // attach a line
+    .style("stroke", "red") // colour the line
+    .attr("x1", correctedMin) // x position of the first end of the line
+    .attr("y1", 100) // y position of the first end of the line
+    .attr("x2", correctedMin) // x position of the second end of the line
+    .attr("y2", 400); // y position of the second end of the line
 
-svg
-  .append("line") // attach a line
-  .style("stroke", "red") // colour the line
-  .attr("x1", correctedMax) // x position of the first end of the line
-  .attr("y1", 100) // y position of the first end of the line
-  .attr("x2", correctedMax) // x position of the second end of the line
-  .attr("y2", 400); // y position of the second end of the line
+  svg
+    .append("line") // attach a line
+    .style("stroke", "red") // colour the line
+    .attr("x1", correctedMax) // x position of the first end of the line
+    .attr("y1", 100) // y position of the first end of the line
+    .attr("x2", correctedMax) // x position of the second end of the line
+    .attr("y2", 400); // y position of the second end of the line
 
-// add line for ideal next guess
-let midpointX = (correctedMax + correctedMin) / 2;
-svg
-  .append("line") // attach a line
-  .style("stroke", "green") // colour the line
-  .attr("x1", midpointX) // x position of the first end of the line
-  .attr("y1", 50) // y position of the first end of the line
-  .attr("x2", midpointX) // x position of the second end of the line
-  .attr("y2", 400); // y position of the second end of the line
+  // add line for ideal next guess
+  let midpointX = (correctedMax + correctedMin) / 2;
+  svg
+    .append("line") // attach a line
+    .style("stroke", "green") // colour the line
+    .attr("x1", midpointX) // x position of the first end of the line
+    .attr("y1", 50) // y position of the first end of the line
+    .attr("x2", midpointX) // x position of the second end of the line
+    .attr("y2", 400); // y position of the second end of the line
 
-// color in rectangular area corresponding to possible range for the numbers
-svg
-  .append("rect")
-  .style("opacity", 0.5)
-  .attr("x", correction * min)
-  .attr("y", 125)
-  .attr("width", totalCorrectedLength)
-  .attr("height", 235)
-  .attr("stroke", "black")
-  .attr("fill", "red");
+  // color in rectangular area corresponding to possible range for the numbers
+  svg
+    .append("rect")
+    .style("opacity", 0.5)
+    .attr("x", correction * min)
+    .attr("y", 125)
+    .attr("width", totalCorrectedLength)
+    .attr("height", 235)
+    .attr("stroke", "black")
+    .attr("fill", "red");
+};
+
+drawChart(0, 100);
 
 /*
 Generate a random number 1-100, for a person to guess
@@ -95,6 +106,8 @@ let isTooLow;
 let numberPastAttempts = 0;
 let minRange = 0;
 let maxRange = 100;
+let minGuess = 0;
+let maxGuess = 100;
 
 /* Get user guess, compare to actual number */
 let submitNumberAndCompare = () => {
@@ -119,6 +132,30 @@ let submitNumberAndCompare = () => {
       isTooLow = false;
     }
   }
+};
+
+/* Update visualization of guesses */
+let updateMinMaxGuesses = () => {
+  // if the guess is too low and it's higher than the existing lowest, update minGuess
+  if (isTooLow && guess > minGuess && minGuess >= minRange) {
+    minGuess = guess;
+  }
+  if (!isTooLow && guess < maxGuess && maxGuess <= maxRange) {
+    maxGuess = guess;
+  }
+};
+
+let updateVisualizationOfGuesses = () => {
+  // update min, max if necessary
+  updateMinMaxGuesses();
+  // draw graph
+  drawChart(minGuess, maxGuess);
+};
+
+let resetVisualizationOfGuesses = () => {
+  minGuess = minRange;
+  maxGuess = maxRange;
+  drawChart(minGuess, maxGuess);
 };
 
 /* Generate response based on comparing guess to actual */
@@ -264,6 +301,7 @@ document.getElementById("button-submit").addEventListener("click", isEqual);
 document.getElementById("button-submit").addEventListener("click", displayGuessCounter);
 document.getElementById("button-submit").addEventListener("click", updateTableCounter);
 document.getElementById("button-submit").addEventListener("click", displayAverageGuess);
+document.getElementById("button-submit").addEventListener("click", updateVisualizationOfGuesses);
 
 /* When user clicks "Restart"*/
 document.getElementById("button-restart").addEventListener("click", function () {
@@ -272,3 +310,4 @@ document.getElementById("button-restart").addEventListener("click", function () 
 document.getElementById("button-restart").addEventListener("click", resetRandomNumber);
 document.getElementById("button-restart").addEventListener("click", displayGuessCounter);
 document.getElementById("button-restart").addEventListener("click", resetTableCounter);
+document.getElementById("button-restart").addEventListener("click", resetVisualizationOfGuesses);
