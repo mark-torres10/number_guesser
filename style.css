@@ -49,12 +49,15 @@
 }
 
 #past-guesses-table {
-  border-radius: 50px;
   position: absolute;
   right: 50px;
   max-width: 40%;
-  height: 150px;
-  border: 3px solid red;
+  height: 50px;
+  border-collapse: separate;
+  border-spacing: 0 0.5em;
+  border: 3px dashed black;
+  padding: 25px;
+  border-radius: 15px;
 }
 
 .counter-table-header {

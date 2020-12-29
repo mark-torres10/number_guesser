@@ -126,25 +126,37 @@ let updateTableCounter = () => {
   let newRow = document.createElement("TR");
   newRow.setAttribute("class", "counter-table-row");
 
-  // add new guess, count as child elements
+  // add new guess, count as child elements.
   let newGuess = document.createElement("TD");
   newGuess.setAttribute("class", "counter-table-guess");
   let newCount = document.createElement("TD");
   newCount.setAttribute("class", "counter-table-count");
 
-  newGuess.innerHTML = guess;
-  newCount.innerHTML = numberPastAttempts;
+  color = "";
+  opacity_val = 0.95;
+  if (isCorrect) {
+    color = "green";
+  } else {
+    color = "red";
+  }
 
-  // add to existing DOM
+  newGuess.innerHTML = guess;
+  newGuess.style.backgroundColor = color;
+  newGuess.style.opacity = opacity_val;
+
+  newCount.innerHTML = numberPastAttempts;
+  newCount.style.backgroundColor = color;
+  newCount.style.opacity = opacity_val;
+
   newRow.appendChild(newGuess);
   newGuess.parentNode.insertBefore(newCount, newGuess.nextSibling);
+  // add to existing DOM
   let counterTable = document.getElementById("past-guesses-table");
   counterTable.appendChild(newRow);
 };
 
 let resetTableCounter = () => {
   let elements = document.getElementsByClassName("counter-table-row");
-  let idx = 5;
   while (elements.length > 0) {
     elements[0].parentNode.removeChild(elements[0]);
   }
