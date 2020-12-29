@@ -9,13 +9,13 @@ function generateValue() {
 }
 
 randomInt = generateValue();
-console.log(`Our random number is: ${randomInt}`);
 
 /* 
 Get user value from input and save it to variable
 */
 
 let isCorrect = false;
+let isTooLow;
 
 let submitNumberAndCompare = () => {
   // get guess
@@ -23,17 +23,20 @@ let submitNumberAndCompare = () => {
 
   document.getElementById("number-guess").value = "";
 
-  console.log(guess);
-
   if (Number.isNaN(guess)) {
     isCorrect = false;
   }
 
-  // compare to random numbe
+  // compare to randomly generated number
   if (guess === randomInt) {
     isCorrect = true;
   } else {
     isCorrect = false;
+    if (guess < randomInt) {
+      isTooLow = true;
+    } else {
+      isTooLow = false;
+    }
   }
 };
 
@@ -57,13 +60,18 @@ let isEqual = () => {
   let color = "";
   if (isCorrect) {
     idx = Math.floor(Math.random() * rightAnswers.length);
+    newPopup.innerHTML = rightAnswers[idx];
     color = "green";
   } else {
     idx = Math.floor(Math.random() * wrongAnswers.length);
+    newPopup.innerHTML = wrongAnswers[idx];
     color = "red";
+    if (isTooLow) {
+      newPopup.innerHTML = newPopup.innerHTML + " Your guess was too low";
+    } else {
+      newPopup.innerHTML = newPopup.innerHTML + " Your guess was too high";
+    }
   }
-
-  newPopup.innerHTML = possibleValues[idx];
 
   alert(`Are the two guesses equal? ${isCorrect}`);
 
@@ -77,22 +85,21 @@ let isEqual = () => {
   document.getElementsByClassName("new-popup")[0].style.backgroundColor = color;
 };
 
+let resetRandomNumber = () => {
+  // generate new number to guess
+  randomInt = generateValue();
+
+  // remove any popup divs
+  let popup = document.querySelector(".new-popup");
+  if (popup) {
+    console.log("removing element!");
+    popup.remove();
+  }
+};
+
+/* When user clicks "Check my Answer!" */
 document.getElementById("button-submit").addEventListener("click", submitNumberAndCompare);
 document.getElementById("button-submit").addEventListener("click", isEqual);
 
-/*
-Compare the user's guess to the generated number
-*/
-
-let compare = (guess, actual) => {};
-/*
-Display the result ("Guess again" if you're off, "Congrats!" if you're right)
-*/
-
-/* 
-Wrapper function to play the game
-*/
-
-let playGame = () => {
-  console.log("Play me!");
-};
+/* When user clicks "Restart"*/
+document.getElementById("button-restart").addEventListener("click", resetRandomNumber);
