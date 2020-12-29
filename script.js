@@ -37,34 +37,44 @@ let submitNumberAndCompare = () => {
   }
 };
 
-let possibleValues = ["Great!", "Good try!", "That's the spirit!"];
-
-// add rightAnswer, wrongAnswer text
+let rightAnswers = ["Got it right!", "Great job!", "Nailed it!"];
+let wrongAnswers = ["Not quite!", "Good try!", "Try Again!"];
 
 let isEqual = () => {
-  // create popup that tells them if they're right or wrong
-  let popup = document.querySelector(".new-button");
-  let guessDiv = document.getElementById("guess-container");
+  // remove existing popup element
+  let popup = document.querySelector(".new-popup");
   if (popup) {
     console.log("removing element!");
     popup.remove();
   }
 
-  let newPopup = document.createElement("DIV"); // Create a new popup element
-  newPopup.innerHTML = possibleValues[Math.floor(Math.random() * possibleValues.length)];
+  // Create a new popup element
+  let newPopup = document.createElement("DIV");
   newPopup.setAttribute("class", "new-popup");
+
+  // update responses, based on if answer is right or wrong
+  let idx;
   let color = "";
   if (isCorrect) {
+    idx = Math.floor(Math.random() * rightAnswers.length);
     color = "green";
   } else {
+    idx = Math.floor(Math.random() * wrongAnswers.length);
     color = "red";
   }
 
+  newPopup.innerHTML = possibleValues[idx];
+
   alert(`Are the two guesses equal? ${isCorrect}`);
+
+  // insert after guess text box
+  let guessDiv = document.getElementById("guess-container");
   guessDiv.parentNode.insertBefore(newPopup, guessDiv.nextSibling);
   console.log(document.getElementsByClassName("new-popup"));
-  console.log(document.getElementsByClassName("new-popup")[0].style.color);
-  //document.getElementsByClassName("new-popup").style.color = "yellow";
+  console.log(document.getElementsByClassName("new-popup")[0].style.backgroundColor);
+
+  // update element color based on answer
+  document.getElementsByClassName("new-popup")[0].style.backgroundColor = color;
 };
 
 document.getElementById("button-submit").addEventListener("click", submitNumberAndCompare);
