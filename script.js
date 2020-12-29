@@ -18,8 +18,10 @@ function generateValue(range = 100) {
 
 randomInt = generateValue();
 
-/* Evaluate user input */
+/* initialize values */
 
+let guess;
+let guessArray = [];
 let isCorrect = false;
 let isTooLow;
 let numberPastAttempts = 0;
@@ -28,6 +30,7 @@ let numberPastAttempts = 0;
 let submitNumberAndCompare = () => {
   // get guess
   guess = parseInt(document.getElementById("number-guess").value);
+  guessArray.push(guess);
 
   document.getElementById("number-guess").value = "";
 
@@ -130,16 +133,7 @@ let updateTableCounter = () => {
   newCount.setAttribute("class", "counter-table-count");
 
   newGuess.innerHTML = guess;
-
-  // see if there are pre-existing rows
-  let latestRows = document.getElementsByClassName("counter-table-row");
-
-  if (latestRows.length === 0) {
-    newCount.innerHTML = "1";
-  } else {
-    let childElements = latestRows[latestRows.length - 1].childNodes;
-    newCount.innerHTML = parseInt(childElements[childElements.length - 1].innerHTML) + 1;
-  }
+  newCount.innerHTML = numberPastAttempts;
 
   // add to existing DOM
   newRow.appendChild(newGuess);
@@ -159,27 +153,26 @@ let resetTableCounter = () => {
 /* 
 update counter 
 */
-let increaseGuessCounter = () => {
-  numberPastAttempts++;
-  document.getElementById(
-    "past-guesses-counter",
-  ).innerHTML = `Number of past guesses: ${numberPastAttempts}`;
-};
 
-let resetGuessCounter = () => {
-  numberPastAttempts = 0;
+let displayGuessCounter = () => {
   document.getElementById(
     "past-guesses-counter",
   ).innerHTML = `Number of past guesses: ${numberPastAttempts}`;
 };
 
 /* When user clicks "Check my Answer!" */
+document.getElementById("button-submit").addEventListener("click", function () {
+  numberPastAttempts++;
+});
 document.getElementById("button-submit").addEventListener("click", submitNumberAndCompare);
 document.getElementById("button-submit").addEventListener("click", isEqual);
-document.getElementById("button-submit").addEventListener("click", increaseGuessCounter);
+document.getElementById("button-submit").addEventListener("click", displayGuessCounter);
 document.getElementById("button-submit").addEventListener("click", updateTableCounter);
 
 /* When user clicks "Restart"*/
+document.getElementById("button-restart").addEventListener("click", function () {
+  numberPastAttempts = 0;
+});
 document.getElementById("button-restart").addEventListener("click", resetRandomNumber);
-document.getElementById("button-restart").addEventListener("click", resetGuessCounter);
+document.getElementById("button-restart").addEventListener("click", displayGuessCounter);
 document.getElementById("button-restart").addEventListener("click", resetTableCounter);

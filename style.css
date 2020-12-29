@@ -78,6 +78,10 @@
   text-align: center;
 }
 
+.counter-table-row {
+  background-color: red;
+}
+
 .counter-table-guess {
   text-align: center;
 }
