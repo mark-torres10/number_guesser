@@ -16,7 +16,7 @@
 
     <!-- Add problem description -->
     <div id="description-container">
-        <p>Welcome! In this game, you'll be trying to figure out the correct number, from 1 to 100. </p>
+        <p>Welcome! In this game, you'll be trying to figure out the correct number, from 0 to 100. </p>
         <p>As you guess, the chart on the right will update with your guesses. </p>
         <p>The graph on the left will show the potential range where the missing number could be. </p>
         <p>What strategy will you figure out to get to the answer in the least number of tries?</p>
@@ -25,7 +25,9 @@
 
     <!-- Add visualization of guesses, logo picture, table of past errors -->    
     <div id="side-by-side">
-        <div id="left-box"></div>
+        <div id="left-box">
+            <p id="numbers-to-guess-message"></p>
+        </div>
         <div id="middle-box">
             <img class="title-pic" src="https://static.vecteezy.com/system/resources/previews/000/096/224/original/number-counter-vector-2.jpg" alt="Title picture"/>
         </div>
@@ -73,7 +75,26 @@
     <!-- Add container to explain theory behind game -->
     <div id="theory-container">
         <div id="theory">
-            <h1>Is there a best way to play the game?</h1>
+            <br/>
+            <h1 class="theory-text">Is there a best way to play the game?</h1>
+            <h3 class="theory-text">What did you think of trying first?</h3>
+            <p class="theory-text">When you played the game, how did you first approach it? 
+                Were you like most people, who just guessed numbers at random? When most people play this game, 
+                they just guess at random. If you guess at random, then sometimes you might get it right on the 
+                first try, but other times it might take you 10 or 20 tries, if not more, to get it right. 
+                If you're trying to get lucky, this approach works fine. But when you were doing this, how many guesses was it 
+                taking you before you got to the right answer?</p>
+            <br/>
+            <br/>
+            <h3 class="theory-text">What's the best way to play the game?</h3>
+            <p class="theory-text">The best way to play the game is to use an approach known as binary search 
+                (check out this <a class="theory-text" style="margin: 0;" href="https://www.cs.usfca.edu/~galles/visualization/Search.html">link</a> for a great
+                demonstration of how it works!)</p>
+            <p class="theory-text">Let's first start with assuming that our missing value is 80</p>
+            <p class="theory-text">You start at the middle of your possible range. In this case, since we're guessing numbers from 
+            0 to 100, you should first start at 50. Assuming that the missing number isn't 50, you immediately cut out half of your
+            possible numbers. 
+            </p>
         </div>
     </div>
     <!-- Add footer -->

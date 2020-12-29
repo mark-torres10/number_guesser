@@ -78,6 +78,11 @@ let drawChart = (min, max) => {
     .attr("height", 235)
     .attr("stroke", "black")
     .attr("fill", "red");
+
+  // update which numbers they should be guessing
+  document.getElementById(
+    "numbers-to-guess-message",
+  ).innerHTML = `Try guessing numbers between ${min} and ${max}!`;
 };
 
 drawChart(0, 100);
@@ -176,6 +181,7 @@ let isEqual = () => {
   // Create a new popup element
   let newPopup = document.createElement("DIV");
   newPopup.setAttribute("class", "new-popup");
+  newPopup.setAttribute("id", "new-popup");
 
   // update responses, based on if answer is right or wrong
   let idx;
@@ -194,6 +200,7 @@ let isEqual = () => {
     } else {
       newPopup.innerHTML = newPopup.innerHTML + " Your guess was too high";
     }
+
     // add optimal strategy button
     let newButton = document.createElement("BUTTON");
     newButton.setAttribute("id", "button-strategy");
@@ -205,8 +212,6 @@ let isEqual = () => {
   // insert after guess text box
   let guessDiv = document.getElementById("guess-container");
   guessDiv.parentNode.insertBefore(newPopup, guessDiv.nextSibling);
-  console.log(document.getElementsByClassName("new-popup"));
-  console.log(document.getElementsByClassName("new-popup")[0].style.backgroundColor);
 
   // update element color based on answer
   document.getElementsByClassName("new-popup")[0].style.backgroundColor = color;
