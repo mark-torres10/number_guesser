@@ -53,11 +53,11 @@
   position: absolute;
   right: 50px;
   max-width: 40%;
-  height: 450px;
+  height: 150px;
   border: 3px solid red;
 }
 
-#past-guess-header {
+.past-guess-header {
   width: 100px;
   border-radius: 25px;
   background-color: blue;
