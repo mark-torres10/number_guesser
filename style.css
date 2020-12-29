@@ -18,7 +18,7 @@
 }
 
 .title-pic {
-  max-width: 40%;
+  max-width: 90%;
   max-height: auto;
   display: block;
   margin-left: auto;
@@ -27,21 +27,26 @@
   border-radius: 25px;
 }
 
+#side-by-side {
+  position: static;
+  height: 300px;
+}
+
 #left-box {
   float: left;
-  background: Red;
+  /*background: Red;*/
   width: 33%;
   height: 150px;
 }
 #middle-box {
   float: left;
-  background: Green;
+  /*background: Green;*/
   width: 34%;
   height: 150px;
 }
 #right-box {
   float: right;
-  background: blue;
+  /*background: blue;*/
   width: 33%;
   height: 150px;
 }
@@ -53,16 +58,23 @@
   max-width: 40%;
 }
 
+#user-interaction-container {
+  position: static;
+  margin-top: 50px;
+}
+
+#guess-container {
+  margin: auto;
+  text-align: center;
+}
+
 .number-guess {
   width: 500px;
   height: 50px;
   border-radius: 25px;
   font-size: 40px;
-}
-
-#guess-container {
-  display: flex;
-  justify-content: center;
+  margin: auto;
+  text-align: center;
 }
 
 #buttons-container {
@@ -113,6 +125,14 @@
 #button-strategy:hover {
   opacity: 0.5;
 }
+
+#footer {
+  background-color: rgb(88, 88, 131);
+  border-radius: 25px;
+  height: 100px;
+  bottom: 50px;
+}
+
 .new-popup {
   color: pink;
   background-color: blue;
