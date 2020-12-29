@@ -2,7 +2,17 @@
 TODO: ADD optimal strategy implementation (maybe demonstration of binary search? A diagram? Demoing it?)
   - Add the section in the bottom? Or, have some link to the button "is there an optimal strategy?"
 */
+/* initialize values */
 
+let guess;
+let guessArray = [];
+let isCorrect = false;
+let isTooLow;
+let numberPastAttempts = 0;
+let minRange = 0;
+let maxRange = 100;
+let minGuess = 0;
+let maxGuess = 100;
 let svg;
 
 let drawChart = (min, max) => {
@@ -80,9 +90,13 @@ let drawChart = (min, max) => {
     .attr("fill", "red");
 
   // update which numbers they should be guessing
-  document.getElementById(
-    "numbers-to-guess-message",
-  ).innerHTML = `Try guessing numbers between ${min} and ${max}!`;
+  if (!isCorrect) {
+    document.getElementById(
+      "numbers-to-guess-message",
+    ).innerHTML = `Try guessing numbers between ${min} and ${max}! Why don't you guess ${Math.floor(
+      (max + min) / 2,
+    )} next?`;
+  }
 };
 
 drawChart(0, 100);
@@ -98,18 +112,6 @@ function generateValue(range = 100) {
 }
 
 randomInt = generateValue();
-
-/* initialize values */
-
-let guess;
-let guessArray = [];
-let isCorrect = false;
-let isTooLow;
-let numberPastAttempts = 0;
-let minRange = 0;
-let maxRange = 100;
-let minGuess = 0;
-let maxGuess = 100;
 
 /* Get user guess, compare to actual number */
 let submitNumberAndCompare = () => {

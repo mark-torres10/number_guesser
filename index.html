@@ -76,6 +76,7 @@
     <div id="theory-container">
         <div id="theory">
             <br/>
+            <br/>
             <h1 class="theory-text">Is there a best way to play the game?</h1>
             <h3 class="theory-text">What did you think of trying first?</h3>
             <p class="theory-text">When you played the game, how did you first approach it? 
@@ -95,6 +96,32 @@
             0 to 100, you should first start at 50. Assuming that the missing number isn't 50, you immediately cut out half of your
             possible numbers. 
             </p>
+            <p class="theory-text"> For this example, our range is now limited to numbers between 51 and 100, since our first guess was too low. 
+                Your next guess should be 75, since this is halfway between 51 and 100. 
+            </p>
+            <p class="theory-text">Now, 75 is too low, so now your missing number has to be between 76 and 100. You should guess 88 next,
+                because this number is halfway between 76 and 100.
+            </p>
+            <p class="theory-text">Now, 88 is too high. So, you know that your missing number has to be between 76 and 88. You should
+                guess 82 next, since this number is halfway between 76 and 88. 
+            </p>
+            <p class="theory-text">Now, 82 is too high. So, you know that your missing number is between 76 and 82. You should
+                guess 79 next, since this number is halfway between 76 and 82. 
+            </p>
+            <p class="theory-text">Now, 79 is too low, so you know that the number has to be between 80 and 82. You should guess 81 
+                next, since this number is halfway between 80 and 82. 
+            </p>
+            <p class="theory-text">Now, 81 is too high. Since you know that 79 was too low and 81 was too high, the missing number must be 80.</p>
+            <p class="theory-text">At long last, you figured out that 80 was the missing number! You were able to figure that out in 7 tries!</p>
+
+            <p class="theory-text">Although it might have felt that it took you a long time to get to the right answer, if you use this approach, you will always get 
+                to the right answer in 7 or more tries! For an explanation of why this is the case (and as an introduction to time complexity analysis), 
+                check out this link <a class="theory-text" style="margin:0;" href="https://www.geeksforgeeks.org/complexity-analysis-of-binary-search/">here</a>!
+            </p>
+
+            <br/>
+            
+            <h3 class="theory-text">Try it out for yourself, and see how many tries it takes you before you get the right answer!</h3>
         </div>
     </div>
     <!-- Add footer -->
