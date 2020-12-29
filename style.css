@@ -17,6 +17,22 @@
   border-radius: 25px;
 }
 
+#dashboard {
+  width: 320px;
+  border: 1px solid black;
+  height: 150px;
+}
+
+.chart {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+  height: 150px;
+}
+
 .title-pic {
   max-width: 90%;
   max-height: auto;
