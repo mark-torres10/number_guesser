@@ -55,10 +55,12 @@ let isEqual = () => {
   // remove existing popup element
   let popup = document.querySelector(".new-popup");
   if (popup) {
-    console.log("removing element!");
     popup.remove();
   }
-
+  let newStrategy = document.querySelector("#button-strategy");
+  if (newStrategy) {
+    newStrategy.remove();
+  }
   // Create a new popup element
   let newPopup = document.createElement("DIV");
   newPopup.setAttribute("class", "new-popup");
@@ -111,9 +113,21 @@ let resetRandomNumber = () => {
   }
 };
 
+/* Increase counter with guesses */
+let increaseGuessCounter = () => {
+  const NUM_REGEX = /\d+/g;
+  let counterString = document.getElementById("past-guesses-counter").innerHTML;
+  let currentCounter = parseInt(counterString.match(NUM_REGEX));
+  let newCounter = currentCounter + 1;
+  document.getElementById(
+    "past-guesses-counter",
+  ).innerHTML = `Number of past guesses: ${newCounter}`;
+};
+
 /* When user clicks "Check my Answer!" */
 document.getElementById("button-submit").addEventListener("click", submitNumberAndCompare);
 document.getElementById("button-submit").addEventListener("click", isEqual);
+document.getElementById("button-submit").addEventListener("click", increaseGuessCounter);
 
 /* When user clicks "Restart"*/
 document.getElementById("button-restart").addEventListener("click", resetRandomNumber);
