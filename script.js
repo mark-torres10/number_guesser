@@ -7,12 +7,12 @@ TODO: Maybe add a visualization of how many guesses it took you to get to the ri
 */
 
 // set the dimensions and margins of the graph
-var margin = { top: 10, right: 30, bottom: 30, left: 60 },
+let margin = { top: 10, right: 30, bottom: 30, left: 60 },
   width = 400 - margin.left - margin.right,
   height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3
+let svg = d3
   .select("#left-box")
   .append("svg")
   .attr("width", width + margin.left + margin.right)
@@ -21,103 +21,58 @@ var svg = d3
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Add X axis
-var x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+let x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+
 svg
   .append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x));
 
-// Add Y axis
-var y = d3.scaleLinear().domain([0, 10]).range([height, 0]);
-//svg.append("g").call(d3.axisLeft(y));
-
-// add baseline
-svg
-  .append("line") // attach a line
-  .style("stroke", "black") // colour the line
-  .attr("x1", 0) // x position of the first end of the line
-  .attr("y1", 200) // y position of the first end of the line
-  .attr("x2", width) // x position of the second end of the line
-  .attr("y2", 200); // y position of the second end of the line
-
 // add new lines
 let correction = width / 100;
 let min = 10;
 let max = 90;
+let correctedMin = min * correction;
+let correctedMax = max * correction;
+let totalCorrectedLength = correctedMax - correctedMin;
 
 // add left, right boundaries
 svg
   .append("line") // attach a line
   .style("stroke", "red") // colour the line
-  .attr("x1", correction * min) // x position of the first end of the line
+  .attr("x1", correctedMin) // x position of the first end of the line
   .attr("y1", 100) // y position of the first end of the line
-  .attr("x2", correction * min) // x position of the second end of the line
+  .attr("x2", correctedMin) // x position of the second end of the line
   .attr("y2", 400); // y position of the second end of the line
 
 svg
   .append("line") // attach a line
   .style("stroke", "red") // colour the line
-  .attr("x1", correction * max) // x position of the first end of the line
+  .attr("x1", correctedMax) // x position of the first end of the line
   .attr("y1", 100) // y position of the first end of the line
-  .attr("x2", correction * max) // x position of the second end of the line
+  .attr("x2", correctedMax) // x position of the second end of the line
   .attr("y2", 400); // y position of the second end of the line
 
 // add line for ideal next guess
-let midpointX = (correction * max + correction * min) / 2;
+let midpointX = (correctedMax + correctedMin) / 2;
 svg
   .append("line") // attach a line
   .style("stroke", "green") // colour the line
   .attr("x1", midpointX) // x position of the first end of the line
-  .attr("y1", 100) // y position of the first end of the line
+  .attr("y1", 50) // y position of the first end of the line
   .attr("x2", midpointX) // x position of the second end of the line
   .attr("y2", 400); // y position of the second end of the line
 
 // color in rectangular area corresponding to possible range for the numbers
-let rect = d3.area().x0(0).x1(400).y0(0).y1(400);
-
-svg.append("path").attr("d", rect).attr("fill", "green");
-
-/*
-// Show confidence interval
 svg
-  .append("path")
-  .datum(data)
-  .attr("fill", "#cce5df")
-  .attr("stroke", "none")
-  .attr(
-    "d",
-    d3
-      .area()
-      .x(function (d) {
-        return x(d.x);
-      })
-      .y0(function (d) {
-        return y(d.CI_right);
-      })
-      .y1(function (d) {
-        return y(d.CI_left);
-      }),
-  );
-
-// Add the line
-svg
-  .append("path")
-  .datum(data)
-  .attr("fill", "none")
-  .attr("stroke", "steelblue")
-  .attr("stroke-width", 1.5)
-  .attr(
-    "d",
-    d3
-      .line()
-      .x(function (d) {
-        return x(d.x);
-      })
-      .y(function (d) {
-        return y(d.y);
-      }),
-  );
-*/
+  .append("rect")
+  .style("opacity", 0.5)
+  .attr("x", correction * min)
+  .attr("y", 125)
+  .attr("width", totalCorrectedLength)
+  .attr("height", 235)
+  .attr("stroke", "black")
+  .attr("fill", "red");
 
 /*
 Generate a random number 1-100, for a person to guess
