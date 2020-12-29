@@ -63,6 +63,7 @@ let isEqual = () => {
     newPopup.innerHTML = rightAnswers[idx];
     color = "green";
   } else {
+    // update message
     idx = Math.floor(Math.random() * wrongAnswers.length);
     newPopup.innerHTML = wrongAnswers[idx];
     color = "red";
@@ -71,6 +72,12 @@ let isEqual = () => {
     } else {
       newPopup.innerHTML = newPopup.innerHTML + " Your guess was too high";
     }
+    // add optimal strategy button
+    let newButton = document.createElement("BUTTON");
+    newButton.setAttribute("id", "button-strategy");
+    newButton.innerHTML = "Help! What's the Optimal Strategy?";
+    let restartButton = document.getElementById("button-restart");
+    restartButton.parentNode.insertBefore(newButton, restartButton.nextSibling);
   }
 
   alert(`Are the two guesses equal? ${isCorrect}`);

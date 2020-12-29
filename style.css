@@ -66,6 +66,7 @@
   height: 75px;
   width: 150px;
   margin-left: 25px;
+  margin-right: 25px;
   border-radius: 12.5px;
 }
 
@@ -73,6 +74,19 @@
   opacity: 0.5;
 }
 
+#button-strategy {
+  background-color: gray;
+  color: white;
+  font-size: 15px;
+  height: 75px;
+  width: 150px;
+  margin-left: 25px;
+  border-radius: 12.5px;
+}
+
+#button-strategy:hover {
+  opacity: 0.5;
+}
 .new-popup {
   color: pink;
   background-color: blue;
