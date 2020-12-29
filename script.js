@@ -1,9 +1,5 @@
 /*
-
 TODO: ADD optimal strategy implementation (maybe demonstration of binary search? A diagram? Demoing it?)
-TODO: Add screen that tracks your guesses
-TODO: Maybe add a visualization of how many guesses it took you to get to the right number? Then, visualize with d3.js?
-
 */
 
 let svg;
@@ -132,6 +128,10 @@ let submitNumberAndCompare = () => {
       isTooLow = false;
     }
   }
+};
+
+let resetGuessArray = () => {
+  guessArray = [];
 };
 
 /* Update visualization of guesses */
@@ -274,7 +274,7 @@ update counter
 let displayGuessCounter = () => {
   document.getElementById(
     "past-guesses-counter",
-  ).innerHTML = `Number of past guesses: ${numberPastAttempts}`;
+  ).innerHTML = `Number of guesses: ${numberPastAttempts}`;
 };
 
 /*
@@ -282,14 +282,18 @@ update average guess
 */
 
 let displayAverageGuess = () => {
-  let totalGuesses = 0;
-  for (let i = 0; i < guessArray.length; i++) {
-    console.log(`The latest entry: ${guessArray[i]}`);
-    totalGuesses += guessArray[i];
+  let average;
+  if (guessArray.length === 0) {
+    average = 0;
+  } else {
+    let totalGuesses = 0;
+    for (let i = 0; i < guessArray.length; i++) {
+      console.log(`The latest entry: ${guessArray[i]}`);
+      totalGuesses += guessArray[i];
+    }
+    average = Math.floor(totalGuesses / guessArray.length);
   }
-
-  let average = Math.floor(totalGuesses / guessArray.length);
-  document.getElementById("past-guesses-average").innerHTML = `Average of guesses: ${average}`;
+  document.getElementById("past-guesses-average").innerHTML = `Average of past guesses: ${average}`;
 };
 
 /* When user clicks "Check my Answer!" */
@@ -311,3 +315,5 @@ document.getElementById("button-restart").addEventListener("click", resetRandomN
 document.getElementById("button-restart").addEventListener("click", displayGuessCounter);
 document.getElementById("button-restart").addEventListener("click", resetTableCounter);
 document.getElementById("button-restart").addEventListener("click", resetVisualizationOfGuesses);
+document.getElementById("button-restart").addEventListener("click", resetGuessArray);
+document.getElementById("button-restart").addEventListener("click", displayAverageGuess);
