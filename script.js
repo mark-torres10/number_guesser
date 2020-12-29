@@ -206,7 +206,12 @@ let isEqual = () => {
     // add optimal strategy button
     let newButton = document.createElement("BUTTON");
     newButton.setAttribute("id", "button-strategy");
-    newButton.innerHTML = "Help! What's the optimal strategy?";
+    newButton.setAttribute("type", "button");
+    let linkToStrategy = document.createElement("a");
+    linkToStrategy.setAttribute("href", "#theory");
+    linkToStrategy.setAttribute("id", "link-to-strategy");
+    linkToStrategy.innerHTML = "What's The Best Strategy?";
+    newButton.appendChild(linkToStrategy);
     let restartButton = document.getElementById("button-restart");
     restartButton.parentNode.insertBefore(newButton, restartButton.nextSibling);
   }
@@ -318,6 +323,9 @@ document.getElementById("button-submit").addEventListener("click", updateVisuali
 /* When user clicks "Restart"*/
 document.getElementById("button-restart").addEventListener("click", function () {
   numberPastAttempts = 0;
+});
+document.getElementById("button-restart").addEventListener("click", function () {
+  isCorrect = false;
 });
 document.getElementById("button-restart").addEventListener("click", resetRandomNumber);
 document.getElementById("button-restart").addEventListener("click", displayGuessCounter);
