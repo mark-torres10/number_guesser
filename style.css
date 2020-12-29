@@ -21,6 +21,21 @@
   text-align: center;
 }
 
+#description {
+  background-color: rgb(88, 88, 131);
+  height: 200px;
+  border-radius: 25px;
+  margin-top: 15px;
+}
+
+.description-text {
+  background-color: rgb(88, 88, 131);
+  color: white;
+  border-radius: 25px;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
 #dashboard {
   width: 320px;
   border: 1px solid black;
@@ -61,7 +76,10 @@
 }
 
 #numbers-to-guess-message {
-  font-size: 20px;
+  font-size: 17px;
+  width: 300px;
+  margin-left: 90px;
+  margin-top: -30px;
 }
 
 #middle-box {

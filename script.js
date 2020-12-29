@@ -1,7 +1,3 @@
-/*
-TODO: ADD optimal strategy implementation (maybe demonstration of binary search? A diagram? Demoing it?)
-  - Add the section in the bottom? Or, have some link to the button "is there an optimal strategy?"
-*/
 /* initialize values */
 
 let guess;
