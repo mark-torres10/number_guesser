@@ -81,6 +81,14 @@
   text-align: center;
 }
 
+#past-guesses-average {
+  position: absolute;
+  right: 5px;
+  bottom: 50px;
+  width: 400px;
+  text-align: center;
+}
+
 .counter-table-row {
   background-color: red;
 }

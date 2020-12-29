@@ -172,6 +172,21 @@ let displayGuessCounter = () => {
   ).innerHTML = `Number of past guesses: ${numberPastAttempts}`;
 };
 
+/*
+update average guess
+*/
+
+let displayAverageGuess = () => {
+  let totalGuesses = 0;
+  for (let i = 0; i < guessArray.length; i++) {
+    console.log(`The latest entry: ${guessArray[i]}`);
+    totalGuesses += guessArray[i];
+  }
+
+  let average = Math.floor(totalGuesses / guessArray.length);
+  document.getElementById("past-guesses-average").innerHTML = `Average of guesses: ${average}`;
+};
+
 /* When user clicks "Check my Answer!" */
 document.getElementById("button-submit").addEventListener("click", function () {
   numberPastAttempts++;
@@ -180,6 +195,7 @@ document.getElementById("button-submit").addEventListener("click", submitNumberA
 document.getElementById("button-submit").addEventListener("click", isEqual);
 document.getElementById("button-submit").addEventListener("click", displayGuessCounter);
 document.getElementById("button-submit").addEventListener("click", updateTableCounter);
+document.getElementById("button-submit").addEventListener("click", displayAverageGuess);
 
 /* When user clicks "Restart"*/
 document.getElementById("button-restart").addEventListener("click", function () {
