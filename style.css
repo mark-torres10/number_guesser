@@ -34,28 +34,43 @@
 
 #left-box {
   float: left;
-  /*background: Red;*/
   width: 33%;
   height: 150px;
 }
 #middle-box {
   float: left;
-  /*background: Green;*/
   width: 34%;
   height: 150px;
 }
 #right-box {
   float: right;
-  /*background: blue;*/
   width: 33%;
   height: 150px;
 }
 
-#past-guesses {
+#past-guesses-table {
   border-radius: 50px;
   position: absolute;
   right: 50px;
   max-width: 40%;
+  height: 450px;
+  border: 3px solid red;
+}
+
+#past-guess-header {
+  width: 100px;
+  border-radius: 25px;
+  background-color: blue;
+  border: 3px solid green;
+  color: yellow;
+}
+
+#past-guesses-counter {
+  position: absolute;
+  right: 5px;
+  bottom: 80px;
+  width: 400px;
+  text-align: center;
 }
 
 #user-interaction-container {
