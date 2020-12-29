@@ -22,6 +22,7 @@ randomInt = generateValue();
 
 let isCorrect = false;
 let isTooLow;
+let numberPastAttempts = 0;
 
 /* Get user guess, compare to actual number */
 let submitNumberAndCompare = () => {
@@ -131,16 +132,13 @@ let updateTableCounter = () => {
   newGuess.innerHTML = guess;
 
   // see if there are pre-existing rows
-  let latestRow = document.getElementsByClassName("counter-table-row");
+  let latestRows = document.getElementsByClassName("counter-table-row");
 
-  if (latestRow.length === 0) {
-    console.log("No pre-existing rows!");
+  if (latestRows.length === 0) {
     newCount.innerHTML = "1";
   } else {
-    console.log("We do get a value for latestRow");
-    console.log(latestRow);
-    console.log(latestRow.length);
-    newCount.innerHTML = "9999";
+    let childElements = latestRows[latestRows.length - 1].childNodes;
+    newCount.innerHTML = parseInt(childElements[childElements.length - 1].innerHTML) + 1;
   }
 
   // add to existing DOM
@@ -162,17 +160,17 @@ let resetTableCounter = () => {
 update counter 
 */
 let increaseGuessCounter = () => {
-  const NUM_REGEX = /\d+/g;
-  let counterString = document.getElementById("past-guesses-counter").innerHTML;
-  let currentCounter = parseInt(counterString.match(NUM_REGEX));
-  let newCounter = currentCounter + 1;
+  numberPastAttempts++;
   document.getElementById(
     "past-guesses-counter",
-  ).innerHTML = `Number of past guesses: ${newCounter}`;
+  ).innerHTML = `Number of past guesses: ${numberPastAttempts}`;
 };
 
 let resetGuessCounter = () => {
-  document.getElementById("past-guesses-counter").innerHTML = `Number of past guesses: 0`;
+  numberPastAttempts = 0;
+  document.getElementById(
+    "past-guesses-counter",
+  ).innerHTML = `Number of past guesses: ${numberPastAttempts}`;
 };
 
 /* When user clicks "Check my Answer!" */

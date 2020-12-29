@@ -57,12 +57,17 @@
   border: 3px solid red;
 }
 
+.counter-table-header {
+  height: 20px;
+}
+
 .past-guess-header {
   width: 100px;
+  height: 20px;
   border-radius: 25px;
-  background-color: blue;
-  border: 3px solid green;
-  color: yellow;
+  color: black;
+  font-size: 20px;
+  vertical-align: top;
 }
 
 #past-guesses-counter {
@@ -70,6 +75,14 @@
   right: 5px;
   bottom: 80px;
   width: 400px;
+  text-align: center;
+}
+
+.counter-table-guess {
+  text-align: center;
+}
+
+.counter-table-count {
   text-align: center;
 }
 
