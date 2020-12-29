@@ -1,4 +1,12 @@
 /*
+
+TODO: ADD optimal strategy implementation (maybe demonstration of binary search? A diagram? Demoing it?)
+TODO: Add screen that tracks your guesses
+TODO: Maybe add a visualization of how many guesses it took you to get to the right number? Then, visualize with d3.js?
+
+*/
+
+/*
 Generate a random number 1-100, for a person to guess
 */
 
@@ -75,7 +83,7 @@ let isEqual = () => {
     // add optimal strategy button
     let newButton = document.createElement("BUTTON");
     newButton.setAttribute("id", "button-strategy");
-    newButton.innerHTML = "Help! What's the Optimal Strategy?";
+    newButton.innerHTML = "Help! What's the optimal strategy?";
     let restartButton = document.getElementById("button-restart");
     restartButton.parentNode.insertBefore(newButton, restartButton.nextSibling);
   }

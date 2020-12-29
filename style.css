@@ -27,6 +27,32 @@
   border-radius: 25px;
 }
 
+#left-box {
+  float: left;
+  background: Red;
+  width: 33%;
+  height: 150px;
+}
+#middle-box {
+  float: left;
+  background: Green;
+  width: 34%;
+  height: 150px;
+}
+#right-box {
+  float: right;
+  background: blue;
+  width: 33%;
+  height: 150px;
+}
+
+#past-guesses {
+  border-radius: 50px;
+  position: absolute;
+  right: 50px;
+  max-width: 40%;
+}
+
 .number-guess {
   width: 500px;
   height: 50px;
