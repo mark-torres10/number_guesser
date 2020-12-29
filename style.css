@@ -1,3 +1,7 @@
+* {
+  background-color: rgb(219, 219, 219);
+}
+
 #navbar {
   background-color: rgb(88, 88, 131);
   margin-top: 20px;
@@ -7,8 +11,10 @@
 }
 
 .navbar-title {
+  background-color: rgb(88, 88, 131);
   color: white;
   padding: 20px;
+  border-radius: 25px;
 }
 
 .title-pic {

@@ -2,21 +2,20 @@
 Generate a random number 1-100, for a person to guess
 */
 
-function generateValue() {
-  let randomFloat = Math.random() * 100;
+function generateValue(range = 100) {
+  let randomFloat = Math.random() * range;
   let randomInt = Math.floor(randomFloat);
   return randomInt;
 }
 
 randomInt = generateValue();
 
-/* 
-Get user value from input and save it to variable
-*/
+/* Evaluate user input */
 
 let isCorrect = false;
 let isTooLow;
 
+/* Get user guess, compare to actual number */
 let submitNumberAndCompare = () => {
   // get guess
   guess = parseInt(document.getElementById("number-guess").value);
@@ -40,6 +39,7 @@ let submitNumberAndCompare = () => {
   }
 };
 
+/* Generate response based on comparing guess to actual */
 let rightAnswers = ["Got it right!", "Great job!", "Nailed it!"];
 let wrongAnswers = ["Not quite!", "Good try!", "Try Again!"];
 
@@ -86,7 +86,6 @@ let isEqual = () => {
 };
 
 let resetRandomNumber = () => {
-  // generate new number to guess
   randomInt = generateValue();
 
   // remove any popup divs
